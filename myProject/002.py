@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 import pandas as pd
-from datetime import date, timedelta
+from datetime import date
 
 
 def add_month(d, md):
@@ -51,9 +51,19 @@ def test04():
     print('Done!')
 
 
+def test05():
+    books = pd.read_excel('D:/temp/Books006.xlsx', index_col='ID')
+    # books['Price'] = books['ListPrice']*books['Discount']
+    for i in range(5, 16):
+        books.at[i, 'Price'] = books.at[i, 'ListPrice'] * books.at[i, 'Discount']
+    # books['ListPrice'] += 2
+    books['ListPrice'] = books['ListPrice'].apply(lambda x: x + 2)
+    print(books)
+
+
 def main():
     print("---main---")
-    test04()
+    test05()
 
 
 if __name__ == '__main__':
